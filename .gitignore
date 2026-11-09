@@ -1,0 +1,15 @@
+# Only code is tracked: ignore everything, then allow code files back in
+*
+!*/
+!*.py
+!*.ipynb
+!*.md
+!LICENSE
+!.gitignore
+
+# Never track these, even if they contain code
+.venv/
+venv/
+.vscode/
+.ipynb_checkpoints/
+__pycache__/
