@@ -29,7 +29,7 @@ X = df.drop("target", axis=1).values.astype(float)
 y = df["target"].values
 
 # Train / test split (80 / 20)
-idx = np.random.RandomState(42).permutation(len(X))
+idx = np.random.permutation(len(X))
 n_test = int(0.2 * len(X))
 X_test, y_test = X[idx[:n_test]], y[idx[:n_test]]
 X_train, y_train = X[idx[n_test:]], y[idx[n_test:]]

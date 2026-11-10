@@ -10,10 +10,10 @@ iris = load_iris()
 names = iris.feature_names
 data = iris.data
 
-binned = np.zeros_like(data, dtype=int)
-for j in range(4):
-    edges = np.linspace(data[:, j].min(), data[:, j].max(), 11)
-    binned[:, j] = np.digitize(data[:, j], edges[1:-1])
+binned = np.column_stack([
+    pd.cut(data[:, j], bins=10, labels=False)
+    for j in range(4)
+])
 
 
 def pmf(x):

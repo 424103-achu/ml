@@ -1,5 +1,6 @@
 import numpy as np;
 import pandas as pd;
+from sklearn.naive_bayes import GaussianNB
 def train_nb(X, y):
     classes = np.unique(y)
     n_samples, n_features = X.shape

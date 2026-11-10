@@ -23,7 +23,7 @@ class LDA:
             sigma += (X_k - mu).T @ (X_k - mu)
 
         sigma /= (n - len(self._classes))
-        self.sigma_inv = np.linalg.inv(sigma)
+        self.sigma_inv = np.linalg.pinv(sigma)
 
     def predict(self, X):
         scores = []
@@ -46,6 +46,7 @@ class QDA:
         for k in self._classes:
             X_k = X[y == k]
             n_k = len(X_k)
+
 
             mu = np.mean(X_k, axis=0)
             self.mu.append(mu)
@@ -71,7 +72,7 @@ X = df.drop("chd", axis=1).values.astype(float)
 y = df["chd"].values
 
 # Train / test split (70 / 30)
-idx = np.random.RandomState(42).permutation(len(X))
+idx = np.random.permutation(len(X))
 n_test = int(0.3 * len(X))
 X_test, y_test = X[idx[:n_test]], y[idx[:n_test]]
 X_train, y_train = X[idx[n_test:]], y[idx[n_test:]]

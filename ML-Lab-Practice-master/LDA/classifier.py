@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 
+
 class LDA:
     def __init__(self):
         self.mu = []
         self.priors = []
         self.sigma_inv = []
-    
+
     def fit(self, X: pd.DataFrame, y: pd.Series):
         n, d = X.shape
         self._classes = y.unique()
@@ -17,10 +18,10 @@ class LDA:
             self.mu.append(mu)
             self.priors.append(len(X_k) / n)
             sigma += (X_k - mu).T @ (X_k - mu)
-        
+
         sigma /= (n - len(self._classes))
-        self.sigma_inv = np.linalg.inv(sigma)
-    
+        self.sigma_inv = np.linalg.pinv(sigma)
+
     def predict(self, X):
         scores = []
         for mu, p in zip(self.mu, self.priors):

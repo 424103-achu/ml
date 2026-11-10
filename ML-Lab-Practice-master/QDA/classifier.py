@@ -22,7 +22,7 @@ class QDA:
         scores = []
         for mu, s, p in zip(self.mu, self.sigma, self.prior):
             diff = X - mu
-            mahalanobis = np.diag(diff @ np.linalg.inv(s) @ diff.T)
+            mahalanobis = np.diag(diff @ np.linalg.pinv(s) @ diff.T)
             delta = -0.5 * np.log(np.linalg.det(s)) - 0.5 * mahalanobis + np.log(p)
             scores.append(delta)
         return self._classes[np.argmax(np.array(scores).T, axis=1)]
